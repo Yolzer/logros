@@ -1,13 +1,9 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>home</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">home</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-header><ion-toolbar><ion-title>Panel</ion-title></ion-toolbar></ion-header>
+<ion-content class="ion-padding">
+  <h2>Puntos acumulados: {{ total }}</h2>
+  <ion-progress-bar [value]="total/100"></ion-progress-bar>
+  <ion-button expand="block" (click)="go('achievements')">Logros</ion-button>
+  <ion-button expand="block" (click)="go('difficulties')">Dificultades</ion-button>
+  <ion-button expand="block" (click)="go('rewards')">Recompensas</ion-button>
+  <ion-button expand="block" (click)="go('wheel')" [disabled]="total < 100">Girar Ruleta</ion-button>
 </ion-content>

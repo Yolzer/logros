@@ -1,20 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { Component } from '@angular/core';
+import { DataService } from '../data.service';
+import { Reward } from '../models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-rewards',
   templateUrl: './rewards.page.html',
   styleUrls: ['./rewards.page.scss'],
-  standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  standalone: false
 })
-export class RewardsPage implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class RewardsPage {
+  list: Reward[] = [];
+  constructor(private ds: DataService, private router: Router) {}
+  ionViewWillEnter() { this.list = this.ds.getRewards(); }
+  goAdd() { this.router.navigate(['/add-reward']); }
 }

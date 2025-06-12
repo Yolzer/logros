@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouteReuseStrategy } from '@angular/router';
+import { RouteReuseStrategy, RouterModule } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
+import { provideRouter } from '@angular/router';
+import { routes } from './app.routes';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -21,7 +22,7 @@ import { AddRewardPage } from './add-reward/add-reward.page';
 import { WheelPage } from './wheel/wheel.page';
 
 // Servicios
-import { DataService } from './services/data.service';
+import { DataService } from './data.service';
 
 @NgModule({
   declarations: [
@@ -36,17 +37,17 @@ import { DataService } from './services/data.service';
     AddRewardPage,
     WheelPage
   ],
-  entryComponents: [],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
-    AppRoutingModule,
+    RouterModule.forRoot(routes),
     ReactiveFormsModule,
     HttpClientModule
   ],
   providers: [
     DataService,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    provideRouter(routes)
   ],
   bootstrap: [AppComponent],
 })

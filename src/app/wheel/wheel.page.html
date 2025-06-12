@@ -1,13 +1,11 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>wheel</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">wheel</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-header><ion-toolbar><ion-title>La Ruleta</ion-title></ion-toolbar></ion-header>
+<ion-content class="ion-padding ion-text-center">
+  <div #wheel class="wheel">
+    <ng-container *ngFor="let r of rewards; let i = index">
+      <div class="slice" [ngStyle]="{'transform':'rotate('+(i*(360/rewards.length))+'deg)'}">
+        {{ r.name }}
+      </div>
+    </ng-container>
+  </div>
+  <ion-button expand="block" (click)="spin()" [disabled]="spinning">Girar</ion-button>
 </ion-content>

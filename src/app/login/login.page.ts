@@ -1,20 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
-  standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  standalone: false
 })
-export class LoginPage implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
+export class LoginPage {
+  form = this.fb.group({
+    user: ['', Validators.required],
+    pass: ['', Validators.required]
+  });
+  constructor(private fb: FormBuilder, private router: Router) {}
+  onSubmit() {
+    if (this.form.valid) {
+      // simula login
+      this.router.navigate(['/home']);
+    }
   }
-
 }

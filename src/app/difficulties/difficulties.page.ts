@@ -1,20 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { Component } from '@angular/core';
+import { DataService } from '../data.service';
+import { Difficulty } from '../models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-difficulties',
   templateUrl: './difficulties.page.html',
   styleUrls: ['./difficulties.page.scss'],
-  standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  standalone: false
 })
-export class DifficultiesPage implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class DifficultiesPage {
+  list: Difficulty[] = [];
+  constructor(private ds: DataService, private router: Router) {}
+  ionViewWillEnter() { this.list = this.ds.getDifficulties(); }
+  goAdd() { this.router.navigate(['/add-difficulty']); }
 }
